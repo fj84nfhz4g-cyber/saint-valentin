@@ -2,118 +2,112 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Aya ❤️</title>
+<title>Aya 🫶🏼</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   height: 100vh;
   overflow: hidden;
   font-family: 'Poppins', Arial, sans-serif;
-  background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+  background: linear-gradient(135deg, #ffe6ee, #ffd6e5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Carte principale */
+/* CARTE ZOOMÉE */
 .card {
   background: white;
-  width: 350px;
-  padding: 25px 20px 30px;
-  border-radius: 30px;
+  width: 92vw;
+  max-width: 420px;
+  padding: 30px 20px 35px;
+  border-radius: 35px;
   text-align: center;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.18);
+  box-shadow: 0 35px 80px rgba(0,0,0,0.2);
   position: relative;
-  animation: appear 1s ease;
 }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Texte animé */
+/* TEXTE ANIMÉ */
 .moving-text {
-  font-size: 20px;
+  font-size: 22px;
   color: #ff4d6d;
-  margin-bottom: 15px;
-  animation: crazyMove 2.2s infinite alternate;
+  margin-bottom: 18px;
+  animation: floatText 2.5s infinite alternate;
 }
 
-@keyframes crazyMove {
-  0%   { transform: translate(0,0) rotate(0deg); }
-  20%  { transform: translate(10px,-6px) rotate(2deg); }
-  40%  { transform: translate(-12px,6px) rotate(-2deg); }
-  60%  { transform: translate(6px,12px) rotate(1deg); }
-  80%  { transform: translate(-6px,-10px) rotate(-1deg); }
-  100% { transform: translate(0,0) rotate(0deg); }
+@keyframes floatText {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
 }
 
-/* Photo */
+/* PHOTO */
 .photo {
-  width: 220px;
-  height: 220px;
-  border-radius: 25px;
+  width: 260px;
+  height: 260px;
+  border-radius: 30px;
   object-fit: cover;
-  margin: 15px auto 20px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+  margin: 10px auto 25px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
 }
 
-/* Boutons */
+/* BOUTONS */
 .buttons {
   position: relative;
-  height: 120px;
+  height: 160px;
 }
 
 button {
-  padding: 14px 36px;
-  font-size: 16px;
-  border-radius: 25px;
+  padding: 16px 42px;
+  font-size: 18px;
+  border-radius: 30px;
   border: none;
   cursor: pointer;
 }
 
+/* OUI */
 #yes {
   background: #ff4d6d;
   color: white;
-  box-shadow: 0 10px 20px rgba(255,77,109,0.45);
+  box-shadow: 0 12px 25px rgba(255,77,109,0.5);
+  position: relative;
+  z-index: 2;
 }
 
+/* NON QUI FUIT */
 #no {
   background: #f1f1f1;
   color: #666;
   position: absolute;
   left: 50%;
+  top: 70px;
   transform: translateX(-50%);
 }
 
-/* Cœurs */
+/* CŒURS */
 .heart {
   position: fixed;
-  font-size: 18px;
+  font-size: 20px;
   animation: fall linear infinite;
 }
 
 @keyframes fall {
   from { transform: translateY(-10vh); opacity: 1; }
-  to   { transform: translateY(110vh); opacity: 0; }
+  to { transform: translateY(110vh); opacity: 0; }
 }
 
-/* Feux d’artifice */
+/* FEUX D’ARTIFICE */
 .firework {
   position: fixed;
-  font-size: 22px;
-  animation: explode 1.5s ease-out forwards;
+  font-size: 26px;
+  animation: explode 1.6s ease-out forwards;
 }
 
 @keyframes explode {
-  0%   { transform: scale(0); opacity: 1; }
-  100% { transform: scale(3); opacity: 0; }
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(3.5); opacity: 0; }
 }
 </style>
 </head>
@@ -122,17 +116,16 @@ button {
 
 <div class="card" id="card">
   <div class="moving-text">
-    Aya ❤️<br>
+    Aya 🫶🏼<br>
     Tu veux être ma Valentine,<br>
-    la femme que j’aime ?
+    la femme que j’aime ? 😘
   </div>
 
-  <!-- PHOTO DE VOUS -->
   <img src="IMG_3448.jpeg" class="photo" alt="Nous deux">
 
   <div class="buttons">
-    <button id="yes">OUI ❤️</button>
-    <button id="no">NON ❤️</button>
+    <button id="yes">OUI 🫶🏼</button>
+    <button id="no">NON 😘</button>
   </div>
 </div>
 
@@ -141,48 +134,50 @@ const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
 const card = document.getElementById("card");
 
-/* Bouton NON qui fuit partout */
-function flee() {
-  const x = Math.random() * 300 - 150;
-  const y = Math.random() * 130;
+/* NON QUI BOUGE TOUT SEUL */
+function moveNo() {
+  const x = Math.random() * 240 - 120;
+  const y = Math.random() * 120;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
-noBtn.addEventListener("mouseover", flee);
-noBtn.addEventListener("click", flee);
+setInterval(moveNo, 600);
+noBtn.addEventListener("click", moveNo);
 
-/* Bouton OUI */
+/* OUI */
 yesBtn.addEventListener("click", () => {
   card.innerHTML = `
-    <h1 style="color:#ff4d6d;">Je t’aime mon bb ❤️</h1>
-    <p style="margin-top:12px;">
-      T’avais pas le choix d’accepter de toute façon namour !
+    <h1 style="color:#ff4d6d; font-size:26px;">
+      Je t’aime mon bb 🫶🏼😘
+    </h1>
+    <p style="margin-top:14px; font-size:18px;">
+      T’avais pas le choix d’accepter de toute façon namour ! 🎉
     </p>
   `;
-  launchFireworks();
+  fireworks();
 });
 
-/* Cœurs qui tombent */
-function createHeart() {
+/* CŒURS */
+function heart() {
   const h = document.createElement("div");
   h.className = "heart";
-  h.innerHTML = "❤️";
+  h.innerHTML = "🫶🏼";
   h.style.left = Math.random() * 100 + "vw";
   h.style.animationDuration = (Math.random() * 3 + 3) + "s";
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 6000);
 }
-setInterval(createHeart, 280);
+setInterval(heart, 260);
 
-/* Feux d’artifice */
-function launchFireworks() {
-  for (let i = 0; i < 45; i++) {
+/* FEUX D’ARTIFICE */
+function fireworks() {
+  for (let i = 0; i < 50; i++) {
     const f = document.createElement("div");
     f.className = "firework";
-    f.innerHTML = "🎆";
+    f.innerHTML = "🎉";
     f.style.left = Math.random() * 100 + "vw";
     f.style.top = Math.random() * 100 + "vh";
     document.body.appendChild(f);
-    setTimeout(() => f.remove(), 1500);
+    setTimeout(() => f.remove(), 1600);
   }
 }
 </script>
