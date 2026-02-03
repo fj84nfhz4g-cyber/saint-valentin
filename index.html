@@ -3,62 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <title>Aya ❤️</title>
+
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100vh;
-  background: radial-gradient(circle at top, #ff5f9e, #b5179e);
+  overflow: hidden;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(135deg, #fff0f5, #ffe4ec);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
 }
 
-.container {
+/* Carte */
+.card {
+  background: white;
+  width: 320px;
+  padding: 30px 20px;
+  border-radius: 30px;
   text-align: center;
-  background: rgba(255,255,255,0.15);
-  padding: 35px;
-  border-radius: 25px;
-  color: white;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 40px rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  position: relative;
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
-  font-size: 26px;
-  margin-bottom: 25px;
+  font-size: 20px;
+  color: #ff4d6d;
+  margin-bottom: 20px;
+  line-height: 1.4;
 }
 
+/* Image */
+.illustration {
+  width: 180px;
+  margin: 0 auto 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Boutons */
 .buttons {
   position: relative;
   height: 120px;
 }
 
 button {
-  padding: 14px 30px;
-  font-size: 18px;
-  border-radius: 30px;
+  padding: 14px 32px;
+  font-size: 16px;
+  border-radius: 25px;
   border: none;
   cursor: pointer;
 }
 
 #yes {
-  background: #ff2e63;
+  background: #ff4d6d;
   color: white;
+  box-shadow: 0 10px 20px rgba(255,77,109,0.4);
 }
 
 #no {
-  background: #ffd166;
+  background: #f1f1f1;
+  color: #666;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
+/* Cœurs flottants */
+.heart {
+  position: fixed;
+  font-size: 18px;
+  animation: heartFall linear infinite;
+}
+
+@keyframes heartFall {
+  from { transform: translateY(-10vh); opacity: 1; }
+  to { transform: translateY(110vh); opacity: 0; }
+}
+
 /* Feux d'artifice */
 .firework {
   position: fixed;
-  font-size: 24px;
+  font-size: 22px;
   animation: explode 1.5s ease-out forwards;
 }
 
@@ -71,40 +112,54 @@ button {
 
 <body>
 
-<div class="container" id="box">
+<div class="card" id="card">
   <h1>Aya 💖<br>tu veux être ma Valentine,<br>la femme que j’aime ?</h1>
 
+  <img class="illustration" src="https://i.imgur.com/2yaf2wb.png" alt="cute">
+
   <div class="buttons">
-    <button id="yes">Oui ❤️</button>
-    <button id="no">Non 😅</button>
+    <button id="yes">OUI ❤️</button>
+    <button id="no">NON 😅</button>
   </div>
 </div>
 
 <script>
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
-const box = document.getElementById("box");
+const card = document.getElementById("card");
 
-// Bouton NON qui fuit
-function moveNo() {
-  const x = Math.random() * 260 - 130;
+/* NON qui fuit vraiment */
+function flee() {
+  const x = Math.random() * 220 - 110;
   const y = Math.random() * 90;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
-noBtn.addEventListener("mouseover", moveNo);
-noBtn.addEventListener("click", moveNo);
+noBtn.addEventListener("mouseover", flee);
+noBtn.addEventListener("click", flee);
 
-// Bouton OUI = feux d’artifice
+/* OUI */
 yesBtn.addEventListener("click", () => {
-  box.innerHTML = `
-    <h1>❤️ Merci Aya ❤️</h1>
+  card.innerHTML = `
+    <h1>YAYY 💖</h1>
     <p>Tu viens de rendre mon cœur heureux ✨</p>
   `;
-  launchFireworks();
+  fireworks();
 });
 
-// Feux d'artifice
-function launchFireworks() {
+/* Cœurs */
+function createHeart() {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💗";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = (Math.random() * 3 + 3) + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}
+setInterval(createHeart, 350);
+
+/* Feux d’artifice */
+function fireworks() {
   for (let i = 0; i < 40; i++) {
     const f = document.createElement("div");
     f.className = "firework";
