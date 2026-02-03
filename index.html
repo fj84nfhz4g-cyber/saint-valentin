@@ -18,51 +18,51 @@ body {
   align-items: center;
 }
 
-/* CARTE ZOOMÉE */
+/* CARTE ENCORE PLUS PROCHE */
 .card {
   background: white;
-  width: 92vw;
-  max-width: 420px;
-  padding: 30px 20px 35px;
-  border-radius: 35px;
+  width: 96vw;
+  max-width: 460px;
+  padding: 28px 18px 28px;
+  border-radius: 38px;
   text-align: center;
-  box-shadow: 0 35px 80px rgba(0,0,0,0.2);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.22);
   position: relative;
 }
 
-/* TEXTE ANIMÉ */
+/* TEXTE */
 .moving-text {
-  font-size: 22px;
+  font-size: 24px;
   color: #ff4d6d;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
   animation: floatText 2.5s infinite alternate;
 }
 
 @keyframes floatText {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
+  100% { transform: translateY(-6px); }
 }
 
-/* PHOTO */
+/* PHOTO PLUS GRANDE */
 .photo {
-  width: 260px;
-  height: 260px;
-  border-radius: 30px;
+  width: 300px;
+  height: 300px;
+  border-radius: 32px;
   object-fit: cover;
-  margin: 10px auto 25px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  margin: 8px auto 18px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.28);
 }
 
 /* BOUTONS */
 .buttons {
   position: relative;
-  height: 160px;
+  height: 150px;
 }
 
 button {
-  padding: 16px 42px;
-  font-size: 18px;
-  border-radius: 30px;
+  padding: 18px 48px;
+  font-size: 20px;
+  border-radius: 32px;
   border: none;
   cursor: pointer;
 }
@@ -71,12 +71,11 @@ button {
 #yes {
   background: #ff4d6d;
   color: white;
-  box-shadow: 0 12px 25px rgba(255,77,109,0.5);
-  position: relative;
+  box-shadow: 0 14px 30px rgba(255,77,109,0.55);
   z-index: 2;
 }
 
-/* NON QUI FUIT */
+/* NON */
 #no {
   background: #f1f1f1;
   color: #666;
@@ -89,7 +88,7 @@ button {
 /* CŒURS */
 .heart {
   position: fixed;
-  font-size: 20px;
+  font-size: 22px;
   animation: fall linear infinite;
 }
 
@@ -101,13 +100,13 @@ button {
 /* FEUX D’ARTIFICE */
 .firework {
   position: fixed;
-  font-size: 26px;
+  font-size: 28px;
   animation: explode 1.6s ease-out forwards;
 }
 
 @keyframes explode {
   0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(3.5); opacity: 0; }
+  100% { transform: scale(3.8); opacity: 0; }
 }
 </style>
 </head>
@@ -136,20 +135,20 @@ const card = document.getElementById("card");
 
 /* NON QUI BOUGE TOUT SEUL */
 function moveNo() {
-  const x = Math.random() * 240 - 120;
-  const y = Math.random() * 120;
+  const x = Math.random() * 260 - 130;
+  const y = Math.random() * 130;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
-setInterval(moveNo, 600);
+setInterval(moveNo, 550);
 noBtn.addEventListener("click", moveNo);
 
 /* OUI */
 yesBtn.addEventListener("click", () => {
   card.innerHTML = `
-    <h1 style="color:#ff4d6d; font-size:26px;">
+    <h1 style="color:#ff4d6d; font-size:28px;">
       Je t’aime mon bb 🫶🏼😘
     </h1>
-    <p style="margin-top:14px; font-size:18px;">
+    <p style="margin-top:14px; font-size:19px;">
       T’avais pas le choix d’accepter de toute façon namour ! 🎉
     </p>
   `;
@@ -166,11 +165,11 @@ function heart() {
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 6000);
 }
-setInterval(heart, 260);
+setInterval(heart, 240);
 
 /* FEUX D’ARTIFICE */
 function fireworks() {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 55; i++) {
     const f = document.createElement("div");
     f.className = "firework";
     f.innerHTML = "🎉";
