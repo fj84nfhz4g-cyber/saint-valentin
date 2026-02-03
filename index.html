@@ -42,36 +42,55 @@ p{font-size:17px;}
   background:#f7f7f7;
 }
 
-.buttons{
-  position:relative;
-  height:130px;
-  margin-top:15px;
+input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid #ddd;
+  font-size:17px;
+  text-align:center;
+  margin-top:12px;
 }
 
 button{
+  margin-top:14px;
   border:none;
   border-radius:999px;
   padding:14px 34px;
   font-size:17px;
   cursor:pointer;
-}
-
-.good{
   background:#ff5b7f;
   color:white;
   box-shadow:0 0 25px rgba(255,90,120,0.6);
   animation:pulse 1.4s infinite;
 }
 
-.bad{
-  position:absolute;
-  background:#f0f0f0;
-}
-
 @keyframes pulse{
   0%{transform:scale(1)}
   50%{transform:scale(1.12)}
   100%{transform:scale(1)}
+}
+
+.error{
+  margin-top:10px;
+  color:#ff5b7f;
+  font-size:15px;
+}
+
+.buttons{
+  position:relative;
+  height:120px;
+  margin-top:15px;
+}
+
+.no{
+  position:absolute;
+  background:#f0f0f0;
+  border:none;
+  padding:12px 28px;
+  border-radius:999px;
+  font-size:16px;
+  cursor:pointer;
 }
 
 .confetti{
@@ -94,21 +113,22 @@ button{
   <h1>Question importante 😌</h1>
   <p>C’est qui l’amour de ta vie ? 🫶🏼</p>
 
-  <div class="buttons">
-    <button class="bad" id="wrong">Akram</button>
-    <button class="good" onclick="enter()">akram</button>
-  </div>
+  <input id="answer" placeholder="Écris la réponse ici…">
+  <button onclick="check()">Valider 💖</button>
+
+  <div class="error" id="error"></div>
 </div>
 
 <!-- 💖 PAGE VALENTINE -->
 <div class="card hidden" id="card">
   <h1>Aya 🫶🏼</h1>
   <p>Tu veux être ma Valentine,<br>la femme que j’aime ? 😘</p>
+
   <img src="IMG_3448.jpeg" class="photo">
 
   <div class="buttons">
-    <button class="good" onclick="accept()">OUI 🫶🏼</button>
-    <button class="bad" id="no">NON 😘</button>
+    <button onclick="accept()">OUI 🫶🏼</button>
+    <button class="no" id="no">NON 😘</button>
   </div>
 </div>
 
@@ -121,41 +141,40 @@ button{
 </div>
 
 <script>
-const wrong=document.getElementById("wrong");
 const no=document.getElementById("no");
 
-// bouton faux qui fuit
-function flee(btn){
+// 🔐 Vérification de la réponse (akram OU Akram)
+function check(){
+  const val=document.getElementById("answer").value.trim();
+  const error=document.getElementById("error");
+
+  if(val === "akram" || val === "Akram"){
+    if(navigator.vibrate)navigator.vibrate([200,80,200]);
+    document.getElementById("gate").classList.add("hidden");
+    document.getElementById("card").classList.remove("hidden");
+  }else{
+    error.innerText="Hmm… réfléchis encore 😘";
+    if(navigator.vibrate)navigator.vibrate([120,60,120]);
+  }
+}
+
+// 😈 NON qui fuit TOUT SEUL
+function moveNo(){
   const x=Math.random()*220-110;
   const y=Math.random()*80-40;
-  btn.style.transform=`translate(${x}px,${y}px)`;
+  no.style.transform=`translate(${x}px,${y}px)`;
   if(navigator.vibrate)navigator.vibrate(80);
 }
+setInterval(moveNo,1200);
+no.addEventListener("mouseover",moveNo);
+no.addEventListener("touchstart",moveNo);
 
-setInterval(()=>flee(wrong),1200);
-wrong.addEventListener("mouseover",()=>flee(wrong));
-wrong.addEventListener("touchstart",()=>flee(wrong));
-
-setInterval(()=>flee(no),1200);
-no.addEventListener("mouseover",()=>flee(no));
-no.addEventListener("touchstart",()=>flee(no));
-
-// entrer sur la page
-function enter(){
-  if(navigator.vibrate)navigator.vibrate([200,80,200]);
-  document.getElementById("gate").classList.add("hidden");
-  document.getElementById("card").classList.remove("hidden");
-}
-
-// accepter
+// 💖 OUI
 function accept(){
   if(navigator.vibrate)navigator.vibrate([300,120,300]);
   document.getElementById("card").classList.add("hidden");
   document.getElementById("celebration").classList.remove("hidden");
-  confetti();
-}
 
-function confetti(){
   for(let i=0;i<40;i++){
     const c=document.createElement("div");
     c.className="confetti";
