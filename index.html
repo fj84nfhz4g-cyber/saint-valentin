@@ -3,166 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aya ❤️</title>
+<title>Aya 💖</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(135deg, #ffe6ec, #ffd6e6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.card {
-  background: white;
-  width: 90%;
-  max-width: 360px;
-  border-radius: 28px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 20px 50px rgba(255, 105, 135, 0.3);
-}
-
-h1 {
-  color: #ff5a7a;
-  margin-bottom: 6px;
-}
-
-p {
-  font-size: 17px;
-  margin-bottom: 16px;
-}
-
-.photo {
-  width: 100%;
-  max-height: 420px;
-  object-fit: contain;
-  border-radius: 20px;
-  background: #f7f7f7;
-}
-
-/* Boutons */
-.buttons {
-  margin-top: 20px;
-  position: relative;
-}
-
-button {
-  border: none;
-  padding: 14px 26px;
-  border-radius: 999px;
-  font-size: 17px;
-  cursor: pointer;
-}
-
-/* OUI 💗 */
-#yes {
-  background: #ff5a7a;
-  color: white;
-  box-shadow: 0 10px 25px rgba(255, 90, 122, 0.5);
-  animation: pulse 1.2s infinite;
-  transition: transform 0.2s ease;
-}
-
-#yes:hover {
-  transform: scale(1.15);
-}
-
-/* NON 😈 */
-#no {
-  margin-top: 14px;
-  background: #f1f1f1;
-  color: #666;
-  position: relative;
-}
-
-/* Pulse OUI */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-
-/* Confettis */
-.confetti {
-  position: fixed;
-  top: -10px;
-  font-size: 26px;
-  animation: fall linear forwards;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #ffe6ec, #ffd1dc);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    transform: scale(0.9);
+    transform-origin: top center;
   }
-}
 
-/* Page 2 */
-#page2 {
-  display: none;
-  text-align: center;
-}
+  .card {
+    background: white;
+    width: 90%;
+    max-width: 340px;
+    border-radius: 28px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 18px 45px rgba(255,105,135,0.3);
+    margin-top: 40px;
+  }
+
+  h1 {
+    color: #ff5b7f;
+    margin-bottom: 6px;
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .photo {
+    width: 100%;
+    max-height: 360px;
+    object-fit: contain;
+    border-radius: 20px;
+    background: #f7f7f7;
+  }
+
+  .buttons {
+    position: relative;
+    height: 120px;
+    margin-top: 10px;
+  }
+
+  .yes {
+    background: #ff5b7f;
+    color: white;
+    border: none;
+    padding: 14px 34px;
+    border-radius: 999px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255,90,120,0.6);
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  .no {
+    position: absolute;
+    background: #f0f0f0;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .celebration {
+    display: none;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .confetti {
+    position: fixed;
+    top: -10px;
+    font-size: 22px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+    }
+  }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="page1">
+<div class="card" id="card">
   <h1>Aya 🫶🏼</h1>
   <p>Tu veux être ma Valentine,<br>la femme que j’aime ? 😘</p>
 
-  <img src="IMG_3448.jpeg" class="photo" alt="Nous deux">
+  <img src="IMG_3448.jpeg" class="photo">
 
   <div class="buttons">
-    <button id="yes">OUI 🫶🏼</button><br>
-    <button id="no">NON 😘</button>
+    <button class="yes" onclick="accept()">OUI 🫶🏼</button>
+    <button class="no" id="no">NON 😘</button>
   </div>
 </div>
 
-<div class="card" id="page2">
-  <h1>Je t’aime mon bb 🫶🏼😘</h1>
+<div class="card celebration" id="celebration">
+  <h1>Je t’aime mon bb 🫶🏼😘🎉</h1>
   <p>T’avais pas le choix d’accepter de toute façon namour ! 🎉</p>
-  <img src="IMG_3103.jpeg" class="photo" alt="Minette">
-  <p style="margin-top:10px;">Même Minette est contente que t’acceptes !!!! 🥰</p>
+  <img src="IMG_3103.jpeg" class="photo">
+  <p><strong>Même Minette est contente que t’acceptes !!!! 🥹💖</strong></p>
 </div>
 
 <script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-const page1 = document.getElementById("page1");
-const page2 = document.getElementById("page2");
+  const no = document.getElementById("no");
 
-/* NON qui fuit */
-function moveNo() {
-  const x = Math.random() * 260 - 130;
-  const y = Math.random() * 200 - 100;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-}
-
-setInterval(moveNo, 600);
-noBtn.addEventListener("touchstart", moveNo);
-noBtn.addEventListener("mouseover", moveNo);
-
-/* OUI */
-yesBtn.addEventListener("click", () => {
-  page1.style.display = "none";
-  page2.style.display = "block";
-
-  for (let i = 0; i < 50; i++) {
-    const c = document.createElement("div");
-    c.className = "confetti";
-    c.innerText = ["🎉","🫶🏼","😘"][Math.floor(Math.random()*3)];
-    c.style.left = Math.random() * 100 + "vw";
-    c.style.animationDuration = 1.5 + Math.random() * 2 + "s";
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 3000);
+  function moveNo() {
+    const x = Math.random() * 220 - 110;
+    const y = Math.random() * 90 - 45;
+    no.style.transform = `translate(${x}px, ${y}px)`;
   }
-});
+
+  no.addEventListener("mouseover", moveNo);
+  no.addEventListener("touchstart", moveNo);
+
+  function accept() {
+    document.getElementById("card").style.display = "none";
+    document.getElementById("celebration").style.display = "block";
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    for (let i = 0; i < 35; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.innerHTML = "🎉";
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.animationDuration = 2 + Math.random() * 3 + "s";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 5000);
+    }
+  }
 </script>
 
 </body>
