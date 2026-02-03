@@ -12,57 +12,69 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: 'Poppins', Arial, sans-serif;
-  background: linear-gradient(135deg, #ffe6ee, #ffd6e5);
+  background: linear-gradient(180deg, #ffe6ee, #ffd6e5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* CARTE ENCORE PLUS PROCHE */
+/* CARTE */
 .card {
   background: white;
-  width: 96vw;
-  max-width: 460px;
-  padding: 28px 18px 28px;
-  border-radius: 38px;
+  width: 94vw;
+  height: 82vh;
+  max-width: 430px;
+  border-radius: 40px;
+  padding: 24px 20px;
   text-align: center;
-  box-shadow: 0 40px 90px rgba(0,0,0,0.22);
-  position: relative;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* TEXTE */
 .moving-text {
-  font-size: 24px;
+  font-size: 22px;
   color: #ff4d6d;
-  margin-bottom: 12px;
   animation: floatText 2.5s infinite alternate;
 }
 
 @keyframes floatText {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-6px); }
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
 }
 
-/* PHOTO PLUS GRANDE */
+/* PHOTO */
 .photo {
-  width: 300px;
-  height: 300px;
-  border-radius: 32px;
+  width: 100%;
+  height: 55%;
+  border-radius: 30px;
   object-fit: cover;
-  margin: 8px auto 18px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.28);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+/* PHOTO FINALE (MINETTE) */
+.photo-final {
+  width: 90%;
+  max-height: 45%;
+  border-radius: 30px;
+  object-fit: cover;
+  margin: 16px auto;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
 }
 
 /* BOUTONS */
 .buttons {
-  position: relative;
-  height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 button {
-  padding: 18px 48px;
+  padding: 18px;
   font-size: 20px;
-  border-radius: 32px;
+  border-radius: 30px;
   border: none;
   cursor: pointer;
 }
@@ -71,21 +83,17 @@ button {
 #yes {
   background: #ff4d6d;
   color: white;
-  box-shadow: 0 14px 30px rgba(255,77,109,0.55);
-  z-index: 2;
+  box-shadow: 0 15px 35px rgba(255,77,109,0.55);
 }
 
 /* NON */
 #no {
   background: #f1f1f1;
   color: #666;
-  position: absolute;
-  left: 50%;
-  top: 70px;
-  transform: translateX(-50%);
+  position: relative;
 }
 
-/* CŒURS */
+/* EMOJIS */
 .heart {
   position: fixed;
   font-size: 22px;
@@ -97,16 +105,15 @@ button {
   to { transform: translateY(110vh); opacity: 0; }
 }
 
-/* FEUX D’ARTIFICE */
 .firework {
   position: fixed;
-  font-size: 28px;
+  font-size: 30px;
   animation: explode 1.6s ease-out forwards;
 }
 
 @keyframes explode {
   0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(3.8); opacity: 0; }
+  100% { transform: scale(4); opacity: 0; }
 }
 </style>
 </head>
@@ -135,41 +142,43 @@ const card = document.getElementById("card");
 
 /* NON QUI BOUGE TOUT SEUL */
 function moveNo() {
-  const x = Math.random() * 260 - 130;
-  const y = Math.random() * 130;
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 120 - 60;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 setInterval(moveNo, 550);
-noBtn.addEventListener("click", moveNo);
 
 /* OUI */
 yesBtn.addEventListener("click", () => {
   card.innerHTML = `
-    <h1 style="color:#ff4d6d; font-size:28px;">
+    <h1 style="color:#ff4d6d; font-size:26px;">
       Je t’aime mon bb 🫶🏼😘
     </h1>
-    <p style="margin-top:14px; font-size:19px;">
-      T’avais pas le choix d’accepter de toute façon namour ! 🎉
+
+    <img src="IMG_3103.jpeg" class="photo-final" alt="Minette">
+
+    <p style="font-size:18px; margin-top:12px;">
+      Même Minette est contente que t’acceptes !!!! 🎉
     </p>
   `;
   fireworks();
 });
 
-/* CŒURS */
-function heart() {
+/* EMOJIS QUI TOMBENT */
+function emojiFall() {
   const h = document.createElement("div");
   h.className = "heart";
-  h.innerHTML = "🫶🏼";
+  h.innerHTML = "🎉";
   h.style.left = Math.random() * 100 + "vw";
   h.style.animationDuration = (Math.random() * 3 + 3) + "s";
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 6000);
 }
-setInterval(heart, 240);
+setInterval(emojiFall, 240);
 
 /* FEUX D’ARTIFICE */
 function fireworks() {
-  for (let i = 0; i < 55; i++) {
+  for (let i = 0; i < 60; i++) {
     const f = document.createElement("div");
     f.className = "firework";
     f.innerHTML = "🎉";
