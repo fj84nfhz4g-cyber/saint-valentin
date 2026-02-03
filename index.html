@@ -3,114 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine 💖</title>
+<title>Aya ❤️</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
 body {
   margin: 0;
-  height: 100vh;
-  background: linear-gradient(180deg, #ffe6ee, #ffd6e6);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #ffe6ec, #ffd6e6);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   overflow: hidden;
 }
 
-/* 💌 Carte */
 .card {
   background: white;
-  width: 92%;
+  width: 90%;
   max-width: 360px;
-  padding: 18px;
-  border-radius: 26px;
+  border-radius: 28px;
+  padding: 20px;
   text-align: center;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-  animation: pop 0.6s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  box-shadow: 0 20px 50px rgba(255, 105, 135, 0.3);
 }
 
 h1 {
-  color: #ff4d6d;
-  font-size: 20px;
-  margin-bottom: 10px;
+  color: #ff5a7a;
+  margin-bottom: 6px;
 }
 
 p {
-  font-size: 14px;
-  margin-bottom: 12px;
+  font-size: 17px;
+  margin-bottom: 16px;
 }
 
-/* 📸 Image propre */
 .photo {
   width: 100%;
   max-height: 420px;
   object-fit: contain;
   border-radius: 20px;
-  background: #f5f5f5;
+  background: #f7f7f7;
 }
 
-/* 💕 Boutons */
+/* Boutons */
 .buttons {
-  margin-top: 16px;
+  margin-top: 20px;
   position: relative;
 }
 
 button {
-  width: 100%;
-  padding: 14px;
-  border-radius: 30px;
   border: none;
-  font-size: 16px;
-  margin-top: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 17px;
   cursor: pointer;
 }
 
+/* OUI 💗 */
 #yes {
-  background: #ff4d6d;
+  background: #ff5a7a;
   color: white;
-  box-shadow: 0 10px 25px rgba(255,77,109,0.5);
+  box-shadow: 0 10px 25px rgba(255, 90, 122, 0.5);
+  animation: pulse 1.2s infinite;
+  transition: transform 0.2s ease;
 }
 
+#yes:hover {
+  transform: scale(1.15);
+}
+
+/* NON 😈 */
 #no {
-  background: #eee;
-  position: absolute;
-  left: 0;
-  right: 0;
+  margin-top: 14px;
+  background: #f1f1f1;
+  color: #666;
+  position: relative;
 }
 
-/* 🎉 Confettis */
+/* Pulse OUI */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Confettis */
 .confetti {
   position: fixed;
-  font-size: 22px;
-  animation: fall 2.5s linear infinite;
+  top: -10px;
+  font-size: 26px;
+  animation: fall linear forwards;
 }
 
 @keyframes fall {
-  from { transform: translateY(-10vh); opacity: 1; }
-  to { transform: translateY(110vh); opacity: 0; }
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
-/* ❤️ Page finale */
-.final {
+/* Page 2 */
+#page2 {
+  display: none;
   text-align: center;
-  animation: pop 0.6s ease;
-}
-
-.final img {
-  width: 100%;
-  max-height: 300px;
-  object-fit: contain;
-  border-radius: 20px;
-  margin-top: 12px;
 }
 </style>
 </head>
@@ -119,22 +114,21 @@ button {
 
 <div class="card" id="page1">
   <h1>Aya 🫶🏼</h1>
-  <p>Tu veux être ma Valentine, <br> la femme que j’aime ? 😘</p>
+  <p>Tu veux être ma Valentine,<br>la femme que j’aime ? 😘</p>
 
   <img src="IMG_3448.jpeg" class="photo" alt="Nous deux">
 
   <div class="buttons">
-    <button id="yes">OUI 🫶🏼</button>
+    <button id="yes">OUI 🫶🏼</button><br>
     <button id="no">NON 😘</button>
   </div>
 </div>
 
-<div class="card final" id="page2" style="display:none;">
+<div class="card" id="page2">
   <h1>Je t’aime mon bb 🫶🏼😘</h1>
   <p>T’avais pas le choix d’accepter de toute façon namour ! 🎉</p>
-
-  <img src="IMG_3103.jpeg" alt="Minette">
-  <p style="margin-top:10px;">Même Minette est contente que t’acceptes !!!! 😻🎉</p>
+  <img src="IMG_3103.jpeg" class="photo" alt="Minette">
+  <p style="margin-top:10px;">Même Minette est contente que t’acceptes !!!! 🥰</p>
 </div>
 
 <script>
@@ -143,26 +137,29 @@ const yesBtn = document.getElementById("yes");
 const page1 = document.getElementById("page1");
 const page2 = document.getElementById("page2");
 
-/* 🏃 NON qui fuit */
-noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * 200 - 100;
+/* NON qui fuit */
+function moveNo() {
+  const x = Math.random() * 260 - 130;
   const y = Math.random() * 200 - 100;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
-});
+}
 
-/* 🎉 OUI */
+setInterval(moveNo, 600);
+noBtn.addEventListener("touchstart", moveNo);
+noBtn.addEventListener("mouseover", moveNo);
+
+/* OUI */
 yesBtn.addEventListener("click", () => {
   page1.style.display = "none";
   page2.style.display = "block";
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 50; i++) {
     const c = document.createElement("div");
     c.className = "confetti";
-    c.innerText = "🎉";
+    c.innerText = ["🎉","🫶🏼","😘"][Math.floor(Math.random()*3)];
     c.style.left = Math.random() * 100 + "vw";
     c.style.animationDuration = 1.5 + Math.random() * 2 + "s";
     document.body.appendChild(c);
-
     setTimeout(() => c.remove(), 3000);
   }
 });
