@@ -62,7 +62,6 @@ button {
   font-size: 18px;
   border-radius: 999px;
   cursor: pointer;
-  transition: transform 0.15s;
 }
 
 #yesBtn {
@@ -95,17 +94,19 @@ input {
 
 <body>
 
-<!-- PAGE 1 -->
+<!-- PAGE 1 : QUESTION -->
 <div class="card" id="gate">
   <h1>Question importante 😌</h1>
   <p>C’est qui l’amour de ta vie ? 🫶🏼</p>
   <input id="answer" placeholder="Écris la réponse ici…" />
-  <button id="validate" style="background:#ff4f7b;color:white;">Valider 💖</button>
+  <button id="validate" style="background:#ff4f7b;color:white;">
+    Valider 💖
+  </button>
 </div>
 
-<!-- PAGE 2 -->
+<!-- PAGE 2 : VALENTINE -->
 <div class="card hidden" id="valentine">
-  <h1>Aya 🫶🏼</h1>
+  <h1>Sherazade 🫶🏼</h1>
   <p>Tu veux être ma Valentine,<br>la femme que j’aime ? 😘</p>
 
   <img src="IMG_5717.jpeg" class="photo" />
@@ -116,10 +117,10 @@ input {
   </div>
 </div>
 
-<!-- PAGE 3 -->
+<!-- PAGE 3 : ACCEPTATION -->
 <div class="card hidden" id="love">
   <h1>Je t’aime mon bb 🫶🏼😘🎉</h1>
-  <p>Je kiffe que t’ai accepté d’être ma Valentine 💖</p>
+  <p><strong>Je kiffe que t’ai accepté d’être ma Valentine 💖</strong></p>
   <img src="IMG_5718.jpeg" class="photo" />
 </div>
 
@@ -136,7 +137,7 @@ document.getElementById("validate").onclick = () => {
     document.getElementById("valentine").classList.remove("hidden");
     vibrate(200);
   } else {
-    vibrate([100,50,100]);
+    vibrate([100, 50, 100]);
     alert("Hmm… réfléchis bien 😏");
   }
 };
@@ -159,7 +160,7 @@ noBtn.addEventListener("touchstart", moveNo);
 
 /* OUI */
 document.getElementById("yesBtn").onclick = () => {
-  vibrate([300,100,300,100,500]);
+  vibrate([300, 100, 300, 100, 500]);
   document.getElementById("valentine").classList.add("hidden");
   document.getElementById("love").classList.remove("hidden");
 };
