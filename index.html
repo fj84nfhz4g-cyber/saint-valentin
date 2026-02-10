@@ -95,7 +95,7 @@ input {
 
 <body>
 
-<!-- PAGE 1 : QUESTION PRIVÉE -->
+<!-- PAGE 1 -->
 <div class="card" id="gate">
   <h1>Question importante 😌</h1>
   <p>C’est qui l’amour de ta vie ? 🫶🏼</p>
@@ -103,12 +103,12 @@ input {
   <button id="validate" style="background:#ff4f7b;color:white;">Valider 💖</button>
 </div>
 
-<!-- PAGE 2 : QUESTION VALENTINE -->
+<!-- PAGE 2 -->
 <div class="card hidden" id="valentine">
   <h1>Aya 🫶🏼</h1>
   <p>Tu veux être ma Valentine,<br>la femme que j’aime ? 😘</p>
 
-  <img src="IMG_3448.jpeg" class="photo" />
+  <img src="IMG_5717.jpeg" class="photo" />
 
   <div class="buttons">
     <button id="yesBtn">OUI 🫶🏼</button>
@@ -116,16 +116,14 @@ input {
   </div>
 </div>
 
-<!-- PAGE 3 : ACCEPTATION -->
+<!-- PAGE 3 -->
 <div class="card hidden" id="love">
   <h1>Je t’aime mon bb 🫶🏼😘🎉</h1>
-  <p>T’avais pas le choix d’accepter de toute façon namour ! 🎉</p>
-  <img src="IMG_3103.jpeg" class="photo" />
-  <p><strong>Même Minette est contente que t’acceptes !!!! 😻</strong></p>
+  <p>Je kiffe que t’ai accepté d’être ma Valentine 💖</p>
+  <img src="IMG_5718.jpeg" class="photo" />
 </div>
 
 <script>
-/* VIBRATION */
 function vibrate(ms = 100) {
   if (navigator.vibrate) navigator.vibrate(ms);
 }
@@ -133,7 +131,7 @@ function vibrate(ms = 100) {
 /* ACCÈS PRIVÉ */
 document.getElementById("validate").onclick = () => {
   const val = document.getElementById("answer").value.trim().toLowerCase();
-  if (val === "akram") {
+  if (val === "mirouane") {
     document.getElementById("gate").classList.add("hidden");
     document.getElementById("valentine").classList.remove("hidden");
     vibrate(200);
@@ -143,27 +141,19 @@ document.getElementById("validate").onclick = () => {
   }
 };
 
-/* NON QUI BOUGE TOUT SEUL */
+/* NON QUI BOUGE */
 const noBtn = document.getElementById("noBtn");
 const box = document.querySelector(".buttons");
 
 function moveNo() {
   const maxX = box.clientWidth - noBtn.offsetWidth;
   const maxY = box.clientHeight - noBtn.offsetHeight;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
   vibrate(40);
 }
 
-/* BOUGE EN CONTINU */
 setInterval(moveNo, 600);
-
-/* ET ENCORE PLUS SI ON S’APPROCHE */
 noBtn.addEventListener("mouseenter", moveNo);
 noBtn.addEventListener("touchstart", moveNo);
 
